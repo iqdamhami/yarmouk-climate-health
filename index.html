@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="مختبر اليرموك لمؤشر المخاطر المناخية والصحية - حاسبة محلية تعمل داخل المتصفح دون تخزين مركزي.">
+<title>مختبر اليرموك | مؤشر المخاطر المناخية–الصحية</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar"><div class="container nav"><div class="brand"><span class="logo">Y</span><div><strong id="brand">مختبر اليرموك</strong><small id="brandSub">المناخ والصحة</small></div></div><div class="nav-actions"><button id="themeBtn" class="icon-btn" aria-label="تبديل المظهر">◐</button><button id="langBtn" class="ghost">EN</button></div></div></header>
+<main class="container">
+<section class="hero"><div><span class="eyebrow" id="eyebrow">محلي • الخصوصية أولًا • نسخة أولية</span><h1 id="heroTitle">مؤشر المخاطر المناخية–الصحية</h1><p id="heroIntro">أداة تفاعلية لحساب مؤشر توضيحي من 100 اعتمادًا على الظروف المناخية، جودة الهواء، المؤشر الصحي، وهشاشة السكان. تتم المعالجة داخل المتصفح ولا يتم رفع المدخلات إلى خادم.</p><div class="hero-actions"><button id="sampleBtn" class="primary">تجربة بيانات نموذجية</button><button id="resetBtn" class="secondary">مسح المدخلات</button><button id="printBtn" class="secondary">طباعة / PDF</button></div></div><div class="privacy-card"><span>🔒</span><div><strong id="privacyTitle">الخصوصية أولًا</strong><p id="privacyText">لا توجد قاعدة بيانات أو حسابات أو رفع للبيانات. النتائج تُحسب محليًا في جهازك.</p></div></div></section>
+<section class="grid">
+<div class="panel inputs"><div class="panel-head"><div><h2 id="dataTitle">بيانات التقييم</h2><p id="dataHelp">أدخل القيم المتاحة. جميع الحقول قابلة للتعديل.</p></div><span class="badge" id="badge">0–100</span></div>
+<div class="form-grid">
+<label><span id="locationLabel">الموقع</span><input id="location" type="text" placeholder="مثال: إربد"></label>
+<label><span id="dateLabel">التاريخ</span><input id="date" type="date"></label>
+<label class="indicator-field"><span id="temperatureLabel">درجة الحرارة (°C)</span><input id="temperature" type="number" min="-30" max="60" step="0.1" placeholder="30" aria-describedby="temperatureLevel"><small id="temperatureLevel" class="field-level neutral">مستوى الحرارة: بانتظار الإدخال</small></label>
+<label class="indicator-field"><span id="humidityLabel">الرطوبة النسبية (%)</span><input id="humidity" type="number" min="0" max="100" step="0.1" placeholder="60" aria-describedby="humidityLevel"><small id="humidityLevel" class="field-level neutral">مستوى الرطوبة: بانتظار الإدخال</small></label>
+<label class="indicator-field"><span id="aqiLabel">جودة الهواء AQI</span><input id="aqi" type="number" min="0" max="500" step="1" placeholder="80" aria-describedby="aqiLevel"><small id="aqiLevel" class="field-level neutral">مستوى جودة الهواء: بانتظار الإدخال</small></label>
+<label class="indicator-field"><span id="healthLabel">المؤشر الصحي (حالات/10,000)</span><input id="health" type="number" min="0" max="1000" step="0.1" placeholder="20" aria-describedby="healthLevel"><small id="healthLevel" class="field-level neutral">مستوى المؤشر الصحي: بانتظار الإدخال</small></label>
+<label class="vulnerability-field"><span id="vulnerabilityLabel">هشاشة السكان (%)</span><input id="vulnerability" type="number" min="0" max="100" step="0.1" placeholder="25" aria-describedby="vulnerabilityLevel"><small id="vulnerabilityLevel" class="field-level neutral">مستوى الهشاشة: بانتظار الإدخال</small></label>
+<label class="indicator-field"><span id="exposureLabel">مدة التعرض (أيام)</span><input id="exposure" type="number" min="0" max="30" step="1" placeholder="1" aria-describedby="exposureLevel"><small id="exposureLevel" class="field-level neutral">مستوى التعرض: بانتظار الإدخال</small></label>
+</div><div id="errors" class="errors" role="alert" aria-live="polite" tabindex="-1"></div><button id="calcBtn" class="primary full">احسب مؤشر الخطر</button></div>
+<div class="panel result" id="resultPanel"><div class="panel-head"><div><h2 id="resultTitle">النتيجة</h2><p id="resultSubtitle">أدخل البيانات ثم اضغط «احسب مؤشر الخطر».</p></div></div><div class="score-wrap"><div class="score-ring" id="scoreRing"><div><strong id="score">—</strong><span>/ 100</span></div></div><div><div id="level" class="level neutral">بانتظار التقييم</div><p id="summary">سيظهر هنا ملخص النتيجة والتفسير.</p></div></div><div class="factors" id="factors"></div><div id="vulnerabilityInterpretation" class="vulnerability-interpretation" hidden></div><div class="recommendations" id="recommendations"><h3 id="generalTitle">إرشادات عامة</h3><p id="generalText">استخدم المؤشر كأداة فرز واستكشاف، وليس كتشخيص طبي أو تنبؤ مؤكد.</p></div><section class="conditions" id="conditions" aria-live="polite"><div class="conditions-head"><div><h3 id="conditionsTitle">حالات صحية تستدعي الانتباه</h3><p id="conditionsIntro">تُعرض هنا حالات قد تتأثر بالحرارة أو جودة الهواء وفق المؤشرات المدخلة. هذه ليست تشخيصًا.</p></div><span class="conditions-badge" id="conditionsBadge">مرتبطة بالمؤشرات</span></div><div id="conditionsList" class="conditions-list"><p class="conditions-empty" id="conditionsEmpty">ستظهر الحالات ذات الصلة بعد حساب المؤشر.</p></div></section></div>
+</section>
+<section class="panel methodology"><div class="panel-head"><div><h2 id="methodologyTitle">كيف يُحسب المؤشر؟</h2><p id="methodologyHelp">نموذج أولي قابل للمعايرة لاحقًا وفق بيانات ودراسات معتمدة.</p></div></div>
+<div class="formula-box" id="formulaBox"><strong>المعادلة:</strong> المؤشر الأساسي = (الحرارة × 35%) + (الرطوبة × 15%) + (جودة الهواء × 20%) + (المؤشر الصحي × 20%) + (الهشاشة × 10%). ثم تُطبَّق زيادة محدودة للتعرض = المؤشر الأساسي × (1 + 0.025 × عدد أيام التعرض الفعّالة)، مع احتساب حد أقصى 7 أيام للتعرض في المضاعف، والنتيجة النهائية محصورة بين 0 و100.</div>
+<div class="method-grid"><div><b>35%</b><span id="heatWeight">الإجهاد الحراري</span></div><div><b>15%</b><span id="humidityWeight">الرطوبة</span></div><div><b>20%</b><span id="airWeight">جودة الهواء</span></div><div><b>20%</b><span id="healthWeight">المؤشر الصحي</span></div><div><b>10%</b><span id="vulnerabilityWeight">هشاشة السكان</span></div></div>
+<p class="note" id="methodNote">تُحوَّل المدخلات إلى درجات 0–100 وفق قواعد النموذج الحالية ثم تُجمع بالأوزان. هذه الحدود والأوزان خاصة بالنموذج الأولي وليست معايير طبية أو بيئية رسمية؛ يجب معايرتها قبل أي استخدام تشغيلي أو بحثي.</p>
+<h3 class="subsection-title" id="termsTitle">تعريف المصطلحات البيئية والمؤشرات</h3>
+<p class="terms-intro" id="termsIntro">يوضح الجدول معنى كل مصطلح، ووحدة القياس، وكيفية تحويله داخل هذا النموذج. قيمة «الدرجة 0–100» هي قيمة النموذج وليست بالضرورة تصنيفًا رسميًا للمؤشر الأصلي.</p>
+<div class="table-wrap"><table class="indicator-table"><thead><tr><th id="termCol">المصطلح</th><th id="definitionCol">التعريف</th><th id="unitCol">الوحدة / المجال</th><th id="ruleCol">قاعدة التحويل في المنصة</th><th id="weightCol">الوزن</th></tr></thead><tbody id="indicatorTableBody"></tbody></table></div>
+</section>
+<section class="panel guide"><h2 id="guideTitle">تفسير النتيجة</h2><div class="legend"><div><i class="low"></i><b>0–29</b><span id="lowLabel">منخفض</span></div><div><i class="moderate"></i><b>30–59</b><span id="moderateLabel">متوسط</span></div><div><i class="high"></i><b>60–79</b><span id="highLabel">مرتفع</span></div><div><i class="critical"></i><b>80–100</b><span id="criticalLabel">مرتفع جدًا</span></div></div></section>
+</main>
+<footer><div class="container"><strong>Yarmouk Climate & Health Lab</strong><span id="footerText">نسخة MVP محلية — لا تخزن البيانات مركزيًا.</span></div></footer>
+<script src="app.js"></script>
+</body></html>
