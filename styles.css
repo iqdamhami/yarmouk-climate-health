@@ -45,3 +45,15 @@ body.dark .condition-card{background:#10201d}.result.risk-critical{box-shadow:0 
 body.dark .formula-box{background:#10201d}
 body.dark .indicator-table th{background:#10201d}
 @media print{.formula-box,.table-wrap{break-inside:avoid}.indicator-table{font-size:9px;min-width:0}}
+
+/* v2.6 date range and expanded fields */
+.date-range .date-inputs{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.date-range input[type="date"]{flex:1;min-width:130px}
+.date-sep{color:var(--muted);font-size:13px;white-space:nowrap}
+.field-note{font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.55;padding:10px 12px;background:var(--soft);border-radius:10px}
+.checklist-ref{margin-top:24px}
+.checklist-list{margin:12px 0 0;padding-inline-start:20px;color:var(--muted);font-size:14px}
+.checklist-list li{margin-bottom:8px}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+@media (max-width:560px){.date-range .date-inputs{flex-direction:column;align-items:stretch}.date-sep{text-align:center}}
